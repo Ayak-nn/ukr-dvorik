@@ -1,54 +1,46 @@
 const express = require('express');
-const cors = require('cors');
 const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Настройка CORS и обработка JSON
-app.use(cors());
-app.use(express.json());
+// Инициализация Supabase с использованием переменных окружения из Vercel
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
 
-// Раздача статических файлов (картинки из папки /img и файлы сайта)
-app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use(express.static(__dirname));
-
-// Инициализация Supabase (используем переменные окружения Vercel или запасные ключи)
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://npqrghhygmzuqxyhynb.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-// API Endpoint: Получение списка всех блюд из Supabase
-app.get('/api/dishes', async (req, res) => {
-    try {
-        const { data, error } = await supabase
-            .from('dishes')
-            .select('*')
-            .order('id', { ascending: true });
-
-        if (error) {
-            throw error;
-        }
-
-        res.json(data);
-    } catch (err) {
-        console.error('Помилка отримання даних:', err.message);
-        res.status(500).json({ error: 'Не вдалося завантажити меню' });
-    }
-});
-
-// Отдача главной страницы по умолчанию
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Запуск сервера для локальной разработки
-const PORT = process.env.PORT || 3000;
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Сервер запущено на порту ${PORT}`);
-    });
+if (!supabaseUrl || !supabaseKey) {
+  console.error('Помилка: Не задано SUPABASE_URL або SUPABASE_KEY у змінних середовища!');
 }
 
-module.exports = app;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Настройка статических папок (для картинок, стилей и скриптов)
+app.use(express.static(path.join(__dirname)));
+app.use('/img', express.static(path.join(__dirname, 'img')));
+
+// Главная страница
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// API-эндпоинт для получения списка блюд из базы данных Supabase
+app.get('/api/dishes', async (req, res) => {
+  try {
+    const { data, error } = await supabase.from('dishes').select('*');
+    
+    if (error) {
+      throw error;
+    }
+    
+    res.json(data);
+  } catch (err) {
+    console.error('Помилка при отриманні даних з Supabase:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Запуск сервера (локально)
+app.listen(port, () => {
+  console.log(`Сервер запущено на порту ${port}`);
+});
