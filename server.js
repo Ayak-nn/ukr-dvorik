@@ -9,12 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ВАЖНО: Раздача статических файлов
-// Позволяет серверу отдавать картинки из папки /img и файлы сайта (index.html, admin.html)
+// Раздача статических файлов (картинки из папки /img и файлы сайта)
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use(express.static(__dirname));
 
-// Инициализация Supabase (используем переменные окружения Vercel)
+// Инициализация Supabase (используем переменные окружения Vercel или запасные ключи)
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://npqrghhygmzuqxyhynb.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY;
 
@@ -44,7 +43,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Запуск сервера (для локальной разработки или Vercel Serverless)
+// Запуск сервера для локальной разработки
 const PORT = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
