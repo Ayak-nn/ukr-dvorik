@@ -1,333 +1,262 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Український Дворик — Меню</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #85a029;
-      --primary-light: #f3f7e6;
-      --primary-dark: #657e1a;
-      --bg: #f8f9fa;
-      --card-bg: #ffffff;
-      --text: #1a1d20;
-      --text-muted: #6c757d;
-      --border: #edf2f7;
-      --shadow: 0 4px 20px rgba(0,0,0,0.05);
-      --radius-lg: 20px;
-      --radius-md: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      padding-bottom: 40px;
-    }
-
-    .header {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px 8px;
-    }
-
-    .brand {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .brand-logo {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .brand-logo span {
-      color: var(--primary);
-    }
-
-    .search-box {
-      position: relative;
-      margin-bottom: 12px;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 10px 16px 10px 40px;
-      border-radius: 25px;
-      border: 1px solid var(--border);
-      background: #f1f3f5;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .search-box i {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-    }
-
-    .nav-scroll {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding-bottom: 4px;
-    }
-
-    .nav-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav-btn {
-      padding: 8px 16px;
-      border-radius: 20px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      font-weight: 600;
-      font-size: 14px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .nav-btn.active {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-
-    .category-title {
-      font-size: 20px;
-      font-weight: 800;
-      margin: 20px 0 12px;
-      color: var(--text);
-    }
-
-    .dish-card {
-      background: var(--card-bg);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 16px;
-      border: 1px solid var(--border);
-      position: relative;
-      align-items: center;
-    }
-
-    .dish-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .dish-title {
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .dish-price {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 6px;
-    }
-
-    .dish-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .dish-img-wrapper {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      flex-shrink: 0;
-    }
-
-    .dish-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-    }
-
-    .like-btn {
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 3px 8px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      cursor: pointer;
-    }
-
-    .like-btn i {
-      color: #ccc;
-    }
-
-    .like-btn.liked i {
-      color: #e63946;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Український Дворик — Меню</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .header h1 span {
+            color: #e67e22;
+        }
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .search-container input:focus {
+            border-color: #e67e22;
+            box-shadow: 0 2px 8px rgba(230,126,34,0.2);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .tab-btn:hover, .tab-btn.active {
+            background: #e67e22;
+            color: #fff;
+            border-color: #e67e22;
+        }
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .dish-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .dish-card:hover {
+            transform: translateY(-5px);
+        }
+        .dish-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .dish-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+        .dish-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e67e22;
+            margin-bottom: 8px;
+        }
+        .description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 
-  <header class="header">
-    <div class="brand">
-      <div class="brand-logo"><i class="fa-solid fa-utensils"></i> Український <span>Дворик</span></div>
-    </div>
-    <div class="search-box">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" id="searchInput" placeholder="Пошук страви..." oninput="filterDishes()">
-    </div>
-    <div class="nav-scroll" id="categoryNav"></div>
-  </header>
+    <header class="header">
+        <h1>Український <span>Дворик</span></h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Пошук страви...">
+        </div>
+    </header>
 
-  <div class="container" id="menuContainer"></div>
+    <main class="container">
+        <!-- Кнопки категорій (Напої, Випічка та Соуси у самому кінці) -->
+        <div class="categories">
+            <button class="tab-btn active" data-category="Всі">Всі</button>
+            <button class="tab-btn" data-category="Перші страви">Перші страви</button>
+            <button class="tab-btn" data-category="Салати">Салати</button>
+            <button class="tab-btn" data-category="Другі страви">Другі страви</button>
+            <button class="tab-btn" data-category="Закуски">Закуски</button>
+            <button class="tab-btn" data-category="Напої">Напої</button>
+            <button class="tab-btn" data-category="Випічка">Випічка</button>
+            <button class="tab-btn" data-category="Соуси">Соуси</button>
+        </div>
 
-  <script>
-    const DISHES = [
-      { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, desc: "Класичний український борщ зі сметаною та зеленню", image: "img/borsch.jpg", likes: 142 },
-      { id: 2, name: "Суп гороховий", category: "Перші страви", price: 94, desc: "Ароматний гороховий суп", image: "img/gorohoviy.jpg", likes: 89 },
-      { id: 3, name: "Солянка", category: "Перші страви", price: 115, desc: "М'ясна солянка з лимоном та маслинами", image: "img/solyanka.jpg", likes: 112 },
-      { id: 4, name: "Грибна юшка", category: "Перші страви", price: 125, desc: "Навариста юшка з лісовими грибами", image: "img/mushroom-soup.jpg", likes: 95 },
-      { id: 5, name: "Окрошка", category: "Перші страви", price: 98, desc: "Освіжаючий літній суп", image: "img/okroshka.jpg", likes: 78 },
-      { id: 6, name: "Бограч", category: "Перші страви", price: 150, desc: "Традиційний угорський бограч", image: "img/bograch.jpg", likes: 165 },
-      { id: 7, name: "Салат «Грецький»", category: "Салати", price: 110, desc: "Свіжі овочі, фета, оливки", image: "img/greek-salad.jpg", likes: 104 },
-      { id: 8, name: "Салат з буряка", category: "Салати", price: 75, desc: "Корисний буряковий салат", image: "img/beetroot-salad.jpg", likes: 62 },
-      { id: 9, name: "Салат з квашеної капусти", category: "Салати", price: 70, desc: "Домашня квашена капуста", image: "img/sauerkraut-salad.jpg", likes: 75 },
-      { id: 10, name: "Картопелька по-селянськи", category: "Другі страви", price: 85, desc: "Запечена картопля з прянощами", image: "img/country-potatoes.jpg", likes: 180 },
-      { id: 11, name: "М'ясна сковорідка", category: "Другі страви", price: 180, desc: "Гаряча сковорідка з м'ясом та овочами", image: "img/meat-skillet.jpg", likes: 210 },
-      { id: 12, name: "Картопляне пюре з гуляшом", category: "Другі страви", price: 140, desc: "Ніжне пюре з соковитим гуляшом", image: "img/mashed-potatoes-goulash.jpg", likes: 130 },
-      { id: 13, name: "Холодець", category: "Закуски", price: 95, desc: "Домашній холодець з хріном", image: "img/kholodets.jpg", likes: 88 },
-      { id: 14, name: "Картопля фри", category: "Другі страви", price: 75, desc: "Хрустка золотиста картопля фри", image: "img/french-fries.jpg", likes: 45 },
-      { id: 15, name: "Гриби тушковані", category: "Другі страви", price: 90, desc: "Ніжні тушковані гриби в сметанному соусі", image: "img/stewed-mushrooms.jpg", likes: 32 },
-      { id: 16, name: "Салат крабовий", category: "Салати", price: 85, desc: "Класичний крабовий салат з кукурудзою та яйцем", image: "img/crab-salad.jpg", likes: 60 },
-      { id: 17, name: "Деруни", category: "Другі страви", price: 95, desc: "Домашні картопляні деруни зі сметаною", image: "img/deruny.jpg", likes: 115 },
-      { id: 18, name: "М'ясо по-французьки", category: "Другі страви", price: 175, desc: "Запечене м'ясо з сиром та помідорами", image: "img/french-style-meat.jpg", likes: 140 },
-      { id: 19, name: "Картопляна запіканка", category: "Другі страви", price: 85, desc: "Апетитна картопляна запіканка з сирною скоринкою", image: "img/potato-casserole.jpg", likes: 50 },
-      { id: 20, name: "Рибка в клярі", category: "Другі страви", price: 130, desc: "Ніжне філе риби у хрусткому клярі", image: "img/fish-in-batter.jpg", likes: 70 },
-      { id: 21, name: "Пельмені", category: "Другі страви", price: 110, desc: "Домашні пельмені з маслом або сметаною", image: "img/pelmeni.jpg", likes: 95 },
-      { id: 22, name: "Омлет", category: "Закуски", price: 65, desc: "Пишний класичний омлет", image: "img/omelette.jpg", likes: 40 },
-      { id: 23, name: "Салат «Овочевий»", category: "Салати", price: 75, desc: "Свіжі сезонні овочі з олією або сметаною", image: "img/vegetable-salad.jpg", likes: 82 },
-      { id: 24, name: "Відбивна курина", category: "Другі страви", price: 125, desc: "Соковита куряча відбивна в паніровці", image: "img/chicken-chop.jpg", likes: 130 },
-      { id: 25, name: "Салат із свіжої капусти", category: "Салати", price: 50, desc: "Хрумкий вітамінний салат зі свіжої капусти", image: "img/cabbage-salad.jpg", likes: 55 },
-      { id: 26, name: "Салат «Олів'є»", category: "Салати", price: 95, desc: "Улюблений святковий салат", image: "img/olivier-salad.jpg", likes: 150 },
-      { id: 27, name: "Голубці", category: "Другі страви", price: 140, desc: "Домашні голубці з м'ясом та рисом у капустяному листі", image: "img/holubtsi.jpg", likes: 160 }
-    ];
+        <!-- Контейнер для карток страв -->
+        <div class="dishes-grid" id="dishesGrid"></div>
+    </main>
 
-    let currentCategory = 'Всі';
+    <script>
+        // Локальна константа зі всіма стравами (нові позиції та напої/соуси в самому низу)
+        const dishes = [
+            // --- Перші страви ---
+            { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, description: "Класичний український борщ зі сметаною (450г)", image: "img/borsch.jpg" },
+            { id: 2, name: "Суп гороховий", category: "Перші страви", price: 94, description: "Ароматний гороховий суп", image: "img/gorohoviy.jpg" },
+            { id: 3, name: "Солянка", category: "Перші страви", price: 115, description: "М'ясна солянка з лимоном та маслинами", image: "img/solyanka.jpg" },
+            { id: 4, name: "Грибна юшка", category: "Перші страви", price: 125, description: "Ароматна грибна юшка", image: "img/mushroom-soup.jpg" },
+            { id: 5, name: "Окрошка", category: "Перші страви", price: 98, description: "Освіжаючий літній суп", image: "img/okroshka.jpg" },
+            { id: 6, name: "Бограч", category: "Перші страви", price: 150, description: "Традиційний угорський бограч", image: "img/bograch.jpg" },
+            { id: 28, name: "Суп з домашньою локшиною", category: "Перші страви", price: 84, description: "Ароматний суп з домашньою локшиною (450г)", image: "img/borsch.jpg" },
+            { id: 29, name: "Суп з фрикадельками", category: "Перші страви", price: 84, description: "Легкий суп з м'ясними фрикадельками (450г)", image: "img/borsch.jpg" },
+            { id: 30, name: "Суп грибний", category: "Перші страви", price: 105, description: "Насичений грибний суп (450г)", image: "img/mushroom-soup.jpg" },
+            { id: 31, name: "Борщ зелений", category: "Перші страви", price: 100, description: "Традиційний зелений борщ зі сметаною (450г)", image: "img/borsch.jpg" },
 
-    function initNav() {
-      const categories = ['Всі', ...new Set(DISHES.map(d => d.category))];
-      const nav = document.getElementById('categoryNav');
-      nav.innerHTML = categories.map(cat => 
-        `<button class="nav-btn ${cat === currentCategory ? 'active' : ''}" onclick="selectCategory('${cat}')">${cat}</button>`
-      ).join('');
-    }
+            // --- Салати ---
+            { id: 7, name: "Салат «Грецький»", category: "Салати", price: 110, description: "Свіжі овочі, фета, оливки", image: "img/greek-salad.jpg" },
+            { id: 8, name: "Салат з буряка", category: "Салати", price: 75, description: "Корисний буряковий салат", image: "img/beetroot-salad.jpg" },
+            { id: 9, name: "Салат з квашеної капусти", category: "Салати", price: 70, description: "Домашня квашена капуста", image: "img/sauerkraut-salad.jpg" },
+            { id: 16, name: "Салат крабовий", category: "Салати", price: 85, description: "Класичний крабовий салат з кукурудзою та яйцем", image: "img/crab-salad.jpg" },
+            { id: 23, name: "Салат «Овочевий»", category: "Салати", price: 75, description: "Свіжі сезонні овочі з олією або сметаною", image: "img/vegetable-salad.jpg" },
+            { id: 25, name: "Салат із свіжої капусти", category: "Салати", price: 50, description: "Хрумкий вітамінний салат зі свіжої капусти", image: "img/cabbage-salad.jpg" },
+            { id: 26, name: "Салат «Олів'є»", category: "Салати", price: 95, description: "Улюблений святковий салат", image: "img/olivier-salad.jpg" },
+            { id: 36, name: "Салат із свіжої квашеної капусти", category: "Салати", price: 56, description: "Кисло-солодкий салат з квашеної капусти", image: "img/cabbage-salad.jpg" },
+            { id: 37, name: "Салат з буряка", category: "Салати", price: 70, description: "Корисний буряковий салат (300г)", image: "img/beetroot-salad.jpg" },
+            { id: 38, name: "Салат «Вінегрет»", category: "Салати", price: 75, description: "Класичний вінегрет (250г)", image: "img/vinegret.jpg" },
+            { id: 39, name: "Салат «Шуба»", category: "Салати", price: 88, description: "Оселедець під шубою (300г)", image: "img/shuba.jpg" },
 
-    function selectCategory(cat) {
-      currentCategory = cat;
-      initNav();
-      renderMenu();
-    }
+            // --- Другі страви ---
+            { id: 10, name: "Картопелька по-селянськи", category: "Другі страви", price: 85, description: "Запечена картопля з прянощами", image: "img/country-potatoes.jpg" },
+            { id: 11, name: "М'ясна сковорідка", category: "Другі страви", price: 180, description: "Гаряча сковорідка з м'ясом та овочами", image: "img/meat-skillet.jpg" },
+            { id: 12, name: "Картопляне пюре з гуляшом", category: "Другі страви", price: 140, description: "Ніжне пюре з соковитим гуляшом", image: "img/mashed-potatoes-goulash.jpg" },
+            { id: 14, name: "Картопля фри", category: "Другі страви", price: 75, description: "Хрустка золотиста картопля фри", image: "img/french-fries.jpg" },
+            { id: 15, name: "Гриби тушковані", category: "Другі страви", price: 90, description: "Ніжні тушковані гриби в сметанному соусі", image: "img/stewed-mushrooms.jpg" },
+            { id: 17, name: "Деруни", category: "Другі страви", price: 95, description: "Домашні картопляні деруни зі сметаною", image: "img/deruny.jpg" },
+            { id: 18, name: "М'ясо по-французьки", category: "Другі страви", price: 175, description: "Запечене м'ясо з сиром та помідорами", image: "img/french-style-meat.jpg" },
+            { id: 19, name: "Картопляна запіканка", category: "Другі страви", price: 85, description: "Апетитна картопляна запіканка з сирною скоринкою", image: "img/potato-casserole.jpg" },
+            { id: 20, name: "Рибка в клярі", category: "Другі страви", price: 130, description: "Ніжне філе риби у хрусткому клярі", image: "img/fish-in-batter.jpg" },
+            { id: 21, name: "Пельмені", category: "Другі страви", price: 110, description: "Домашні пельмені з маслом або сметаною", image: "img/pelmeni.jpg" },
+            { id: 24, name: "Відбивна курина", category: "Другі страви", price: 125, description: "Соковита куряча відбивна в паніровці", image: "img/chicken-cutlet.jpg" },
+            { id: 27, name: "Голубці", category: "Другі страви", price: 140, description: "Домашні голубці з м'ясом та рисом у капустяному листі", image: "img/cabbage-rolls.jpg" },
 
-    function renderMenu() {
-      const container = document.getElementById('menuContainer');
-      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-      
-      const filtered = DISHES.filter(dish => {
-        const matchesCat = currentCategory === 'Всі' || dish.category === currentCategory;
-        const matchesSearch = dish.name.toLowerCase().includes(searchQuery);
-        return matchesCat && matchesSearch;
-      });
+            // --- Закуски ---
+            { id: 13, name: "Холодець", category: "Закуски", price: 95, description: "Домашній холодець з хріном", image: "img/kholodets.jpg" },
+            { id: 22, name: "Омлет", category: "Закуски", price: 65, description: "Пишний класичний омлет", image: "img/omelette.jpg" },
 
-      const categories = [...new Set(filtered.map(d => d.category))];
+            // --- Випічка ---
+            { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, description: "Домашні пиріжки (1 шт.)", image: "img/borsch.jpg" },
+            { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, description: "Пиріжки з тушкованою капустою (1 шт.)", image: "img/borsch.jpg" },
+            { id: 42, name: "Біляші", category: "Випічка", price: 48, description: "Соковиті м'ясні біляші (1 шт.)", image: "img/borsch.jpg" },
+            { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, description: "Класичний багатошаровий торт (100г)", image: "img/borsch.jpg" },
+            { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, description: "Ніжний медовий торт (100г)", image: "img/borsch.jpg" },
 
-      if (filtered.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding: 40px; color: var(--text-muted);">Нічого не знайдено</div>';
-        return;
-      }
+            // --- Напої та Соуси (у самому низу) ---
+            { id: 32, name: "Компот", category: "Напої", price: 36, description: "Домашній компот (250г)", image: "img/borsch.jpg" },
+            { id: 33, name: "Сік", category: "Напої", price: 40, description: "Натуральний сік (250г)", image: "img/borsch.jpg" },
+            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, description: "Гарячий чай на вибір", image: "img/borsch.jpg" },
+            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, description: "Ароматна кава", image: "img/borsch.jpg" },
+            { id: 45, name: "Сметана", category: "Соуси", price: 0, description: "Свіжа сметана", image: "img/borsch.jpg" },
+            { id: 46, name: "Майонез", category: "Соуси", price: 0, description: "Класичний майонез", image: "img/borsch.jpg" },
+            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, description: "Томатний кетчуп", image: "img/borsch.jpg" },
+            { id: 48, name: "Оцет", category: "Соуси", price: 0, description: "Столовий оцет", image: "img/borsch.jpg" },
+            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, description: "Солодке згущене молоко", image: "img/borsch.jpg" }
+        ];
 
-      container.innerHTML = categories.map(cat => {
-        const catDishes = filtered.filter(d => d.category === cat);
-        return `
-          <div class="category-title">${cat}</div>
-          ${catDishes.map(dish => `
-            <div class="dish-card">
-              <div class="dish-info">
-                <div class="dish-title">${dish.name}</div>
-                <div class="dish-price">${dish.price !== null ? dish.price + ' ₴' : ''}</div>
-                <div class="dish-desc">${dish.desc}</div>
-              </div>
-              <div class="dish-img-wrapper">
-                <img src="${dish.image}" class="dish-img" alt="${dish.name}">
-                <button class="like-btn" onclick="toggleLike(this)">
-                  <i class="fa-solid fa-heart"></i>
-                  <span>${dish.likes}</span>
-                </button>
-              </div>
-            </div>
-          `).join('')}
-        `;
-      }).join('');
-    }
+        function renderDishes(items) {
+            const grid = document.getElementById('dishesGrid');
+            grid.innerHTML = '';
 
-    function toggleLike(btn) {
-      btn.classList.toggle('liked');
-      const span = btn.querySelector('span');
-      let count = parseInt(span.textContent);
-      span.textContent = btn.classList.contains('liked') ? count + 1 : count - 1;
-    }
+            items.forEach(dish => {
+                const card = document.createElement('div');
+                card.classList.add('dish-card');
+                
+                card.innerHTML = `
+                    <img src="${dish.image}" alt="${dish.name}">
+                    <div class="dish-info">
+                        <div>
+                            <h3>${dish.name}</h3>
+                            <p class="description">${dish.description}</p>
+                        </div>
+                        <p class="price">${dish.price} ₴</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
 
-    function filterDishes() {
-      renderMenu();
-    }
+        // Фільтрація за категоріями
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
 
-    initNav();
-    renderMenu();
-  </script>
+                const category = e.target.getAttribute('data-category');
+                if (category === 'Всі') {
+                    renderDishes(dishes);
+                } else {
+                    const filtered = dishes.filter(dish => dish.category === category);
+                    renderDishes(filtered);
+                }
+            });
+        });
+
+        // Пошук по назві
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = dishes.filter(dish => dish.name.toLowerCase().includes(query));
+            renderDishes(filtered);
+        });
+
+        // Початкове завантаження
+        renderDishes(dishes);
+    </script>
 </body>
 </html>
