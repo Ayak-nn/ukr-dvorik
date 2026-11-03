@@ -144,7 +144,7 @@
     </main>
 
     <script>
-        // Локальна константа зі всіма стравами (нові позиції та напої/соуси в самому низу)
+        // Локальна константа зі всіма стравами (включно з новими позиціями)
         const dishes = [
             // --- Перші страви ---
             { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, description: "Класичний український борщ зі сметаною (450г)", image: "img/borsch.jpg" },
@@ -184,28 +184,29 @@
             { id: 21, name: "Пельмені", category: "Другі страви", price: 110, description: "Домашні пельмені з маслом або сметаною", image: "img/pelmeni.jpg" },
             { id: 24, name: "Відбивна курина", category: "Другі страви", price: 125, description: "Соковита куряча відбивна в паніровці", image: "img/chicken-chop.jpg" },
             { id: 27, name: "Голубці", category: "Другі страви", price: 140, description: "Домашні голубці з м'ясом та рисом у капустяному листі", image: "img/holubtsi.jpg" },
+            { id: 50, name: "Карасик смажений", category: "Другі страви", price: 110, description: "Свіжий смажений карасик з золотистою скоринкою", image: "img/fried-carp.jpg" },
 
             // --- Закуски ---
             { id: 13, name: "Холодець", category: "Закуски", price: 95, description: "Домашній холодець з хріном", image: "img/kholodets.jpg" },
             { id: 22, name: "Омлет", category: "Закуски", price: 65, description: "Пишний класичний омлет", image: "img/omelette.jpg" },
 
             // --- Випічка ---
-            { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, description: "Домашні пиріжки (1 шт.)" },
-            { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, description: "Пиріжки з тушкованою капустою (1 шт.)" },
-            { id: 42, name: "Біляші", category: "Випічка", price: 48, description: "Соковиті м'ясні біляші (1 шт.)" },
-            { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, description: "Класичний багатошаровий торт (100г)" },
-            { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, description: "Ніжний медовий торт (100г)" },
+            { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, description: "Домашні пиріжки (1 шт.)", image: "img/pies.jpg" },
+            { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, description: "Пиріжки з тушкованою капустою (1 шт.)", image: "img/pies.jpg" },
+            { id: 42, name: "Біляші", category: "Випічка", price: 48, description: "Соковиті м'ясні біляші (1 шт.)", image: "img/belyashi.jpg" },
+            { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, description: "Класичний багатошаровий торт (100г)", image: "img/borsch.jpg" },
+            { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, description: "Ніжний медовий торт (100г)", image: "img/borsch.jpg" },
 
             // --- Напої та Соуси (у самому низу) ---
-            { id: 32, name: "Компот", category: "Напої", price: 36, description: "Домашній компот (250г)" },
-            { id: 33, name: "Сік", category: "Напої", price: 40, description: "Натуральний сік (250г)" },
-            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, description: "Гарячий чай на вибір" },
-            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, description: "Ароматна кава" },
-            { id: 45, name: "Сметана", category: "Соуси", price: 0, description: "Свіжа сметана" },
-            { id: 46, name: "Майонез", category: "Соуси", price: 0, description: "Класичний майонез" },
-            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, description: "Томатний кетчуп" },
-            { id: 48, name: "Оцет", category: "Соуси", price: 0, description: "Столовий оцет" },
-            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, description: "Солодке згущене молоко" }
+            { id: 32, name: "Компот", category: "Напої", price: 36, description: "Домашній компот (250г)", image: "img/borsch.jpg" },
+            { id: 33, name: "Сік", category: "Напої", price: 40, description: "Натуральний сік (250г)", image: "img/borsch.jpg" },
+            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, description: "Гарячий чай на вибір", image: "img/borsch.jpg" },
+            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, description: "Ароматна кава", image: "img/borsch.jpg" },
+            { id: 45, name: "Сметана", category: "Соуси", price: 0, description: "Свіжа сметана", image: "img/borsch.jpg" },
+            { id: 46, name: "Майонез", category: "Соуси", price: 0, description: "Класичний майонез", image: "img/borsch.jpg" },
+            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, description: "Томатний кетчуп", image: "img/borsch.jpg" },
+            { id: 48, name: "Оцет", category: "Соуси", price: 0, description: "Столовий оцет", image: "img/borsch.jpg" },
+            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, description: "Солодке згущене молоко", image: "img/borsch.jpg" }
         ];
 
         function renderDishes(items) {
@@ -215,48 +216,3 @@
             items.forEach(dish => {
                 const card = document.createElement('div');
                 card.classList.add('dish-card');
-                
-                card.innerHTML = `
-                    <img src="${dish.image}" alt="${dish.name}">
-                    <div class="dish-info">
-                        <div>
-                            <h3>${dish.name}</h3>
-                            <p class="description">${dish.description}</p>
-                        </div>
-                        <p class="price">${dish.price} ₴</p>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Фільтрація за категоріями
-        const buttons = document.querySelectorAll('.tab-btn');
-        buttons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                buttons.forEach(btn => btn.classList.remove('active'));
-                e.target.classList.add('active');
-
-                const category = e.target.getAttribute('data-category');
-                if (category === 'Всі') {
-                    renderDishes(dishes);
-                } else {
-                    const filtered = dishes.filter(dish => dish.category === category);
-                    renderDishes(filtered);
-                }
-            });
-        });
-
-        // Пошук по назві
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const filtered = dishes.filter(dish => dish.name.toLowerCase().includes(query));
-            renderDishes(filtered);
-        });
-
-        // Початкове завантаження
-        renderDishes(dishes);
-    </script>
-</body>
-</html>
