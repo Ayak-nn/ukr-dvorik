@@ -216,3 +216,46 @@
             items.forEach(dish => {
                 const card = document.createElement('div');
                 card.classList.add('dish-card');
+                
+                card.innerHTML = `
+                    <img src="${dish.image}" alt="${dish.name}">
+                    <div class="dish-info">
+                        <div>
+                            <h3>${dish.name}</h3>
+                            <p class="description">${dish.description}</p>
+                        </div>
+                        <p class="price">${dish.price} ₴</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Фільтрація за категоріями
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                buttons.forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+
+                const category = e.target.getAttribute('data-category');
+                if (category === 'Всі') {
+                    renderDishes(dishes);
+                } else {
+                    const filtered = dishes.filter(dish => dish.category === category);
+                    renderDishes(filtered);
+                }
+            });
+        });
+
+        // Пошук по назві
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = dishes.filter(dish => dish.name.toLowerCase().includes(query));
+            renderDishes(filtered);
+        });
+
+        // Початкове завантаження
+        renderDishes(dishes);
+    </script>
