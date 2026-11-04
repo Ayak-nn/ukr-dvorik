@@ -127,7 +127,7 @@
     </header>
 
     <main class="container">
-        <!-- Кнопки категорій (Напої, Випічка та Соуси у самому кінці) -->
+        <!-- Кнопки категорій -->
         <div class="categories">
             <button class="tab-btn active" data-category="Всі">Всі</button>
             <button class="tab-btn" data-category="Перші страви">Перші страви</button>
@@ -144,7 +144,7 @@
     </main>
 
     <script>
-        // Локальна константа зі всіма стравами (включно з новими позиціями)
+        // Локальна константа зі всіма стравами
         const dishes = [
             // --- Перші страви ---
             { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, description: "Класичний український борщ зі сметаною (450г)", image: "img/borsch.jpg" },
@@ -156,7 +156,7 @@
             { id: 28, name: "Суп з домашньою локшиною", category: "Перші страви", price: 84, description: "Ароматний суп з домашньою локшиною (450г)", image: "img/borsch.jpg" },
             { id: 29, name: "Суп з фрикадельками", category: "Перші страви", price: 84, description: "Легкий суп з м'ясними фрикадельками (450г)", image: "img/borsch.jpg" },
             { id: 30, name: "Суп грибний", category: "Перші страви", price: 105, description: "Насичений грибний суп (450г)", image: "img/mushroom-soup.jpg" },
-            { id: 31, name: "Борщ зелений", category: "Перші страви", price: 100, description: "Традиційний зелений борщ зі сметаною (450г)", image: "img/borsch.jpg" },
+            { id: 31, name: "Зелений борщ", category: "Перші страви", price: 100, description: "Традиційний зелений борщ зі сметаною (450г)", image: "img/green-borsch.jpg" },
 
             // --- Салати ---
             { id: 7, name: "Салат «Грецький»", category: "Салати", price: 110, description: "Свіжі овочі, фета, оливки", image: "img/greek-salad.jpg" },
@@ -185,6 +185,9 @@
             { id: 24, name: "Відбивна курина", category: "Другі страви", price: 125, description: "Соковита куряча відбивна в паніровці", image: "img/chicken-chop.jpg" },
             { id: 27, name: "Голубці", category: "Другі страви", price: 140, description: "Домашні голубці з м'ясом та рисом у капустяному листі", image: "img/holubtsi.jpg" },
             { id: 50, name: "Карасик смажений", category: "Другі страви", price: 110, description: "Свіжий смажений карасик з золотистою скоринкою", image: "img/fried-carp.jpg" },
+            { id: 51, name: "Пюре", category: "Другі страви", price: 60, description: "Ніжне картопляне пюре з маслом", image: "img/mashed-potatoes.jpg" },
+            { id: 52, name: "Піджарка", category: "Другі страви", price: 130, description: "Соковита м'ясна піджарка", image: "img/pork-stew.jpg" },
+            { id: 53, name: "Відбивна свинна", category: "Другі страви", price: 135, description: "Апетитна свиняча відбивна в паніровці", image: "img/pork-chop.jpg" },
 
             // --- Закуски ---
             { id: 13, name: "Холодець", category: "Закуски", price: 95, description: "Домашній холодець з хріном", image: "img/kholodets.jpg" },
@@ -197,7 +200,7 @@
             { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, description: "Класичний багатошаровий торт (100г)", image: "img/borsch.jpg" },
             { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, description: "Ніжний медовий торт (100г)", image: "img/borsch.jpg" },
 
-            // --- Напої та Соуси (у самому низу) ---
+            // --- Напої та Соуси ---
             { id: 32, name: "Компот", category: "Напої", price: 36, description: "Домашній компот (250г)", image: "img/borsch.jpg" },
             { id: 33, name: "Сік", category: "Напої", price: 40, description: "Натуральний сік (250г)", image: "img/borsch.jpg" },
             { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, description: "Гарячий чай на вибір", image: "img/borsch.jpg" },
@@ -259,3 +262,5 @@
         // Початкове завантаження
         renderDishes(dishes);
     </script>
+</body>
+</html>
