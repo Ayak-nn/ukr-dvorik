@@ -84,35 +84,32 @@
             display: flex;
             flex-direction: column;
         }
-        /* Збільшуємо висоту фотографії, щоб блюдо було добре видно */
+        /* Максимально увеличиваем фото, чтобы блюдо отлично просматривалось */
         .dish-card img {
             width: 100%;
-            height: 220px; 
+            height: 260px; 
             object-fit: cover;
         }
-        /* Зменшуємо білу частину (відступи) під фотографією */
+        /* Компактная белая часть снизу (только название и цена) */
         .dish-info {
-            padding: 10px 12px;
+            padding: 10px 14px;
             display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+            align-items: center;
             justify-content: space-between;
+            gap: 10px;
+            flex-grow: 1;
         }
         .dish-info h3 {
-            font-size: 1rem;
-            margin-bottom: 4px;
+            font-size: 1.05rem;
             color: #2c3e50;
+            margin: 0;
         }
         .price {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: bold;
             color: #e67e22;
-            margin-top: 4px;
-        }
-        .description {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.2;
+            white-space: nowrap;
+            margin: 0;
         }
     </style>
 </head>
@@ -145,69 +142,69 @@
     <script>
         const dishes = [
             // --- Перші страви ---
-            { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, description: "Класичний український борщ зі сметаною (450г)", image: "img/borsch.jpg" },
-            { id: 2, name: "Суп гороховий", category: "Перші страви", price: 94, description: "Ароматний гороховий суп", image: "img/gorohoviy.jpg" },
-            { id: 3, name: "Солянка", category: "Перші страви", price: 115, description: "М'ясна солянка з лимоном та маслинами", image: "img/solyanka.jpg" },
-            { id: 4, name: "Грибна юшка", category: "Перші страви", price: 125, description: "Ароматна грибна юшка", image: "img/mushroom-soup.jpg" },
-            { id: 5, name: "Окрошка", category: "Перші страви", price: 98, description: "Освіжаючий літній суп", image: "img/okroshka.jpg" },
-            { id: 6, name: "Бограч", category: "Перші страви", price: 150, description: "Традиційний угорський бограч", image: "img/bograch.jpg" },
-            { id: 28, name: "Суп з домашньою локшиною", category: "Перші страви", price: 84, description: "Ароматний суп з домашньою локшиною (450г)", image: "img/borsch.jpg" },
-            { id: 29, name: "Суп з фрикадельками", category: "Перші страви", price: 84, description: "Легкий суп з м'ясними фрикадельками (450г)", image: "img/borsch.jpg" },
-            { id: 30, name: "Суп грибний", category: "Перші страви", price: 105, description: "Насичений грибний суп (450г)", image: "img/mushroom-soup.jpg" },
-            { id: 31, name: "Зелений борщ", category: "Перші страви", price: 100, description: "Традиційний зелений борщ зі сметаною (450г)", image: "img/green-borsch.jpg" },
+            { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, image: "img/borsch.jpg" },
+            { id: 2, name: "Суп гороховий", category: "Перші страви", price: 94, image: "img/gorohoviy.jpg" },
+            { id: 3, name: "Солянка", category: "Перші страви", price: 115, image: "img/solyanka.jpg" },
+            { id: 4, name: "Грибна юшка", category: "Перші страви", price: 125, image: "img/mushroom-soup.jpg" },
+            { id: 5, name: "Окрошка", category: "Перші страви", price: 98, image: "img/okroshka.jpg" },
+            { id: 6, name: "Бограч", category: "Перші страви", price: 150, image: "img/bograch.jpg" },
+            { id: 28, name: "Суп з домашньою локшиною", category: "Перші страви", price: 84, image: "img/borsch.jpg" },
+            { id: 29, name: "Суп з фрикадельками", category: "Перші страви", price: 84, image: "img/borsch.jpg" },
+            { id: 30, name: "Суп грибний", category: "Перші страви", price: 105, image: "img/mushroom-soup.jpg" },
+            { id: 31, name: "Зелений борщ", category: "Перші страви", price: 100, image: "img/green-borsch.jpg" },
 
             // --- Салати ---
-            { id: 7, name: "Салат «Грецький»", category: "Салати", price: 110, description: "Свіжі овочі, фета, оливки", image: "img/greek-salad.jpg" },
-            { id: 8, name: "Салат з буряка", category: "Салати", price: 75, description: "Корисний буряковий салат", image: "img/beetroot-salad.jpg" },
-            { id: 9, name: "Салат з квашеної капусти", category: "Салати", price: 70, description: "Домашня квашена капуста", image: "img/sauerkraut-salad.jpg" },
-            { id: 16, name: "Салат крабовий", category: "Салати", price: 85, description: "Класичний крабовий салат з кукурудзою та яйцем", image: "img/crab-salad.jpg" },
-            { id: 23, name: "Салат «Овочевий»", category: "Салати", price: 75, description: "Свіжі сезонні овочі з олією або сметаною", image: "img/vegetable-salad.jpg" },
-            { id: 25, name: "Салат із свіжої капусти", category: "Салати", price: 50, description: "Хрумкий вітамінний салат зі свіжої капусти", image: "img/cabbage-salad.jpg" },
-            { id: 26, name: "Салат «Олів'є»", category: "Салати", price: 95, description: "Улюблений святковий салат", image: "img/olivier-salad.jpg" },
-            { id: 36, name: "Салат із свіжої квашеної капусти", category: "Салати", price: 56, description: "Кисло-солодкий салат з квашеної капусти", image: "img/cabbage-salad.jpg" },
-            { id: 37, name: "Салат з буряка", category: "Салати", price: 70, description: "Корисний буряковий салат (300г)", image: "img/beetroot-salad.jpg" },
-            { id: 38, name: "Салат «Вінегрет»", category: "Салати", price: 75, description: "Класичний вінегрет (250г)", image: "img/vinegret.jpg" },
-            { id: 39, name: "Салат «Шуба»", category: "Салати", price: 88, description: "Оселедець під шубою (300г)", image: "img/shuba.jpg" },
+            { id: 7, name: "Салат «Грецький»", category: "Салати", price: 110, image: "img/greek-salad.jpg" },
+            { id: 8, name: "Салат з буряка", category: "Салати", price: 75, image: "img/beetroot-salad.jpg" },
+            { id: 9, name: "Салат з квашеної капусти", category: "Салати", price: 70, image: "img/sauerkraut-salad.jpg" },
+            { id: 16, name: "Салат крабовий", category: "Салати", price: 85, image: "img/crab-salad.jpg" },
+            { id: 23, name: "Салат «Овочевий»", category: "Салати", price: 75, image: "img/vegetable-salad.jpg" },
+            { id: 25, name: "Салат із свіжої капусти", category: "Салати", price: 50, image: "img/cabbage-salad.jpg" },
+            { id: 26, name: "Салат «Олів'є»", category: "Салати", price: 95, image: "img/olivier-salad.jpg" },
+            { id: 36, name: "Салат із свіжої квашеної капусти", category: "Салати", price: 56, image: "img/cabbage-salad.jpg" },
+            { id: 37, name: "Салат з буряка", category: "Салати", price: 70, image: "img/beetroot-salad.jpg" },
+            { id: 38, name: "Салат «Вінегрет»", category: "Салати", price: 75, image: "img/vinegret.jpg" },
+            { id: 39, name: "Салат «Шуба»", category: "Салати", price: 88, image: "img/shuba.jpg" },
 
             // --- Другі страви ---
-            { id: 10, name: "Картопелька по-селянськи", category: "Другі страви", price: 85, description: "Запечена картопля з прянощами", image: "img/country-potatoes.jpg" },
-            { id: 11, name: "М'ясна сковорідка", category: "Другі страви", price: 180, description: "Гаряча сковорідка з м'ясом та овочами", image: "img/meat-skillet.jpg" },
-            { id: 12, name: "Картопляне пюре з гуляшом", category: "Другі страви", price: 140, description: "Ніжне пюре з соковитим гуляшом", image: "img/mashed-potatoes-goulash.jpg" },
-            { id: 14, name: "Картопля фри", category: "Другі страви", price: 75, description: "Хрустка золотиста картопля фри", image: "img/french-fries.jpg" },
-            { id: 15, name: "Гриби тушковані", category: "Другі страви", price: 90, description: "Ніжні тушковані гриби в сметанному соусі", image: "img/stewed-mushrooms.jpg" },
-            { id: 17, name: "Деруни", category: "Другі страви", price: 95, description: "Домашні картопляні деруни зі сметаною", image: "img/deruny.jpg" },
-            { id: 18, name: "М'ясо по-французьки", category: "Другі страви", price: 175, description: "Запечене м'ясо з сиром та помідорами", image: "img/french-style-meat.jpg" },
-            { id: 19, name: "Картопляна запіканка", category: "Другі страви", price: 85, description: "Апетитна картопляна запіканка з сирною скоринкою", image: "img/potato-casserole.jpg" },
-            { id: 20, name: "Рибка в клярі", category: "Другі страви", price: 130, description: "Ніжне філе риби у хрусткому клярі", image: "img/fish-in-batter.jpg" },
-            { id: 21, name: "Пельмені", category: "Другі страви", price: 110, description: "Домашні пельмені з маслом або сметаною", image: "img/pelmeni.jpg" },
-            { id: 24, name: "Відбивна курина", category: "Другі страви", price: 125, description: "Соковита куряча відбивна в паніровці", image: "img/chicken-chop.jpg" },
-            { id: 27, name: "Голубці", category: "Другі страви", price: 140, description: "Домашні голубці з м'ясом та рисом у капустяному листі", image: "img/holubtsi.jpg" },
-            { id: 50, name: "Карасик смажений", category: "Другі страви", price: 110, description: "Свіжий смажений карасик з золотистою скоринкою", image: "img/fried-carp.jpg" },
-            { id: 51, name: "Пюре", category: "Другі страви", price: 60, description: "Ніжне картопляне пюре з маслом", image: "img/mashed-potatoes.jpg" },
-            { id: 52, name: "Піджарка", category: "Другі страви", price: 130, description: "Соковита м'ясна піджарка", image: "img/pork-stew.jpg" },
-            { id: 53, name: "Відбивна свинна", category: "Другі страви", price: 135, description: "Апетитна свиняча відбивна в паніровці", image: "img/pork-chop.jpg" },
+            { id: 10, name: "Картопелька по-селянськи", category: "Другі страви", price: 85, image: "img/country-potatoes.jpg" },
+            { id: 11, name: "М'ясна сковорідка", category: "Другі страви", price: 180, image: "img/meat-skillet.jpg" },
+            { id: 12, name: "Картопляне пюре з гуляшом", category: "Другі страви", price: 140, image: "img/mashed-potatoes-goulash.jpg" },
+            { id: 14, name: "Картопля фри", category: "Другі страви", price: 75, image: "img/french-fries.jpg" },
+            { id: 15, name: "Гриби тушковані", category: "Другі страви", price: 90, image: "img/stewed-mushrooms.jpg" },
+            { id: 17, name: "Деруни", category: "Другі страви", price: 95, image: "img/deruny.jpg" },
+            { id: 18, name: "М'ясо по-французьки", category: "Другі страви", price: 175, image: "img/french-style-meat.jpg" },
+            { id: 19, name: "Картопляна запіканка", category: "Другі страви", price: 85, image: "img/potato-casserole.jpg" },
+            { id: 20, name: "Рибка в клярі", category: "Другі страви", price: 130, image: "img/fish-in-batter.jpg" },
+            { id: 21, name: "Пельмені", category: "Другі страви", price: 110, image: "img/pelmeni.jpg" },
+            { id: 24, name: "Відбивна курина", category: "Другі страви", price: 125, image: "img/chicken-chop.jpg" },
+            { id: 27, name: "Голубці", category: "Другі страви", price: 140, image: "img/holubtsi.jpg" },
+            { id: 50, name: "Карасик смажений", category: "Другі страви", price: 110, image: "img/fried-carp.jpg" },
+            { id: 51, name: "Пюре", category: "Другі страви", price: 60, image: "img/mashed-potatoes.jpg" },
+            { id: 52, name: "Піджарка", category: "Другі страви", price: 130, image: "img/pork-stew.jpg" },
+            { id: 53, name: "Відбивна свинна", category: "Другі страви", price: 135, image: "img/pork-chop.jpg" },
 
             // --- Закуски ---
-            { id: 13, name: "Холодець", category: "Закуски", price: 95, description: "Домашній холодець з хріном", image: "img/kholodets.jpg" },
-            { id: 22, name: "Омлет", category: "Закуски", price: 65, description: "Пишний класичний омлет", image: "img/omelette.jpg" },
+            { id: 13, name: "Холодець", category: "Закуски", price: 95, image: "img/kholodets.jpg" },
+            { id: 22, name: "Омлет", category: "Закуски", price: 65, image: "img/omelette.jpg" },
 
             // --- Випічка ---
-            { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, description: "Домашні пиріжки (1 шт.)", image: "img/pies.jpg" },
-            { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, description: "Пиріжки з тушкованою капустою (1 шт.)", image: "img/pies.jpg" },
-            { id: 42, name: "Біляші", category: "Випічка", price: 48, description: "Соковиті м'ясні біляші (1 шт.)", image: "img/belyashi.jpg" },
-            { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, description: "Класичний багатошаровий торт (100г)", image: "img/borsch.jpg" },
-            { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, description: "Ніжний медовий торт (100г)", image: "img/borsch.jpg" },
+            { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, image: "img/pies.jpg" },
+            { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, image: "img/pies.jpg" },
+            { id: 42, name: "Біляші", category: "Випічка", price: 48, image: "img/belyashi.jpg" },
+            { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, image: "img/borsch.jpg" },
+            { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, image: "img/borsch.jpg" },
 
             // --- Напої та Соуси ---
-            { id: 32, name: "Компот", category: "Напої", price: 36, description: "Домашній компот (250г)", image: "img/borsch.jpg" },
-            { id: 33, name: "Сік", category: "Напої", price: 40, description: "Натуральний сік (250г)", image: "img/borsch.jpg" },
-            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, description: "Гарячий чай на вибір", image: "img/borsch.jpg" },
-            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, description: "Ароматна кава", image: "img/borsch.jpg" },
-            { id: 45, name: "Сметана", category: "Соуси", price: 0, description: "Свіжа сметана", image: "img/borsch.jpg" },
-            { id: 46, name: "Майонез", category: "Соуси", price: 0, description: "Класичний майонез", image: "img/borsch.jpg" },
-            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, description: "Томатний кетчуп", image: "img/borsch.jpg" },
-            { id: 48, name: "Оцет", category: "Соуси", price: 0, description: "Столовий оцет", image: "img/borsch.jpg" },
-            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, description: "Солодке згущене молоко", image: "img/borsch.jpg" }
+            { id: 32, name: "Компот", category: "Напої", price: 36, image: "img/borsch.jpg" },
+            { id: 33, name: "Сік", category: "Напої", price: 40, image: "img/borsch.jpg" },
+            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, image: "img/borsch.jpg" },
+            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, image: "img/borsch.jpg" },
+            { id: 45, name: "Сметана", category: "Соуси", price: 0, image: "img/borsch.jpg" },
+            { id: 46, name: "Майонез", category: "Соуси", price: 0, image: "img/borsch.jpg" },
+            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, image: "img/borsch.jpg" },
+            { id: 48, name: "Оцет", category: "Соуси", price: 0, image: "img/borsch.jpg" },
+            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, image: "img/borsch.jpg" }
         ];
 
         function renderDishes(items) {
@@ -221,10 +218,7 @@
                 card.innerHTML = `
                     <img src="${dish.image}" alt="${dish.name}">
                     <div class="dish-info">
-                        <div>
-                            <h3>${dish.name}</h3>
-                            <p class="description">${dish.description}</p>
-                        </div>
+                        <h3>${dish.name}</h3>
                         <p class="price">${dish.price} ₴</p>
                     </div>
                 `;
