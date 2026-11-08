@@ -14,16 +14,16 @@
         body {
             background-color: #f9f9f9;
             color: #333;
-            padding: 20px;
+            padding: 15px;
         }
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         .header h1 span {
             color: #e67e22;
@@ -34,7 +34,7 @@
         }
         .search-container input {
             width: 100%;
-            padding: 12px 20px;
+            padding: 10px 18px;
             font-size: 1rem;
             border: 1px solid #ddd;
             border-radius: 25px;
@@ -54,16 +54,16 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 8px;
+            margin-bottom: 25px;
         }
         .tab-btn {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: 0.3s;
         }
         .tab-btn:hover, .tab-btn.active {
@@ -73,47 +73,46 @@
         }
         .dishes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
         }
         .dish-card {
             background: #fff;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
         }
-        .dish-card:hover {
-            transform: translateY(-5px);
-        }
+        /* Збільшуємо висоту фотографії, щоб блюдо було добре видно */
         .dish-card img {
             width: 100%;
-            height: 320px;
+            height: 220px; 
             object-fit: cover;
         }
+        /* Зменшуємо білу частину (відступи) під фотографією */
         .dish-info {
-            padding: 15px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
             justify-content: space-between;
         }
         .dish-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            margin-bottom: 4px;
             color: #2c3e50;
         }
         .price {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #e67e22;
-            margin-bottom: 8px;
+            margin-top: 4px;
         }
         .description {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
+            line-height: 1.2;
         }
     </style>
 </head>
@@ -144,7 +143,6 @@
     </main>
 
     <script>
-        // Локальна константа зі всіма стравами
         const dishes = [
             // --- Перші страви ---
             { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, description: "Класичний український борщ зі сметаною (450г)", image: "img/borsch.jpg" },
@@ -234,7 +232,6 @@
             });
         }
 
-        // Фільтрація за категоріями
         const buttons = document.querySelectorAll('.tab-btn');
         buttons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -251,7 +248,6 @@
             });
         });
 
-        // Пошук по назві
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
@@ -259,7 +255,6 @@
             renderDishes(filtered);
         });
 
-        // Початкове завантаження
         renderDishes(dishes);
     </script>
 </body>
