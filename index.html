@@ -75,7 +75,7 @@
         }
         .dishes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 16px;
             align-items: start;
         }
@@ -87,22 +87,41 @@
             display: flex;
             flex-direction: column;
         }
+
+        /* Контейнер фото: блюдо видно полностью без обрезки по краям */
         .dish-img-wrap {
+            position: relative;
             width: 100%;
             aspect-ratio: 4 / 3;
-            background-color: #f0ece6;
+            background-color: #ece6de;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .dish-img-wrap img {
+        /* Мягкий размытый фон из той же картинки, чтобы не было пустых белых полос по бокам */
+        .dish-img-bg {
+            position: absolute;
+            inset: -12px;
+            width: calc(100% + 24px);
+            height: calc(100% + 24px);
+            object-fit: cover;
+            filter: blur(12px) brightness(0.92);
+            opacity: 0.65;
+            pointer-events: none;
+        }
+        /* Само блюдо целиком */
+        .dish-img-main {
+            position: relative;
+            z-index: 1;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             object-position: center center;
             display: block;
+            transition: transform 0.25s ease;
         }
+
         .dish-info {
             padding: 12px 14px;
             display: flex;
@@ -110,6 +129,9 @@
             justify-content: space-between;
             gap: 10px;
             flex-grow: 1;
+            background: #fff;
+            position: relative;
+            z-index: 2;
         }
         .dish-info h3 {
             font-size: 1.02rem;
@@ -124,16 +146,22 @@
             white-space: nowrap;
             margin: 0;
         }
+
+        /* Адаптация под мобильный экран */
         @media (max-width: 540px) {
             body {
-                padding: 12px;
+                padding: 10px;
             }
             .header h1 {
-                font-size: 1.75rem;
+                font-size: 1.7rem;
             }
             .dishes-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
+            }
+            /* На телефоне квадратный формат 1:1 дает больше высоты для вертикальных и крупных фото */
+            .dish-img-wrap {
+                aspect-ratio: 1 / 1;
             }
             .dish-info {
                 padding: 9px 10px;
@@ -175,6 +203,9 @@
     </main>
 
     <script>
+        // Параметр scale (необязательный):
+        // Если на каком-то фото блюдо снято слишком мелко — добавь scale: 1.2 (увеличит на 20%).
+        // Если нужно сдвинуть центр кадра — добавь pos: "center 30%".
         const dishes = [
             // --- Перші страви ---
             { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, image: "img/borsch.jpg" },
@@ -258,8 +289,14 @@
                 const isNoPhotoCategory = noPhotoCategories.includes((dish.category || '').trim().toLowerCase());
                 const hasValidImage = !isNoPhotoCategory && dish.image && dish.image.trim() !== '';
 
+                const scaleStyle = dish.scale ? `transform: scale(${dish.scale});` : '';
+                const posStyle = dish.pos ? `object-position: ${dish.pos};` : '';
+
                 const imgHtml = hasValidImage
-                    ? `<div class="dish-img-wrap"><img src="${dish.image}" alt="${dish.name}" loading="lazy"></div>`
+                    ? `<div class="dish-img-wrap">
+                           <img class="dish-img-bg" src="${dish.image}" alt="" aria-hidden="true">
+                           <img class="dish-img-main" src="${dish.image}" alt="${dish.name}" loading="lazy" style="${scaleStyle} ${posStyle}">
+                       </div>`
                     : '';
 
                 card.innerHTML = `
