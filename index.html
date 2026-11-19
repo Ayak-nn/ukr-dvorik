@@ -75,6 +75,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 15px;
+            align-items: start;
         }
         .dish-card {
             background: #fff;
@@ -90,7 +91,7 @@
             object-fit: cover;
         }
         .dish-info {
-            padding: 10px 14px;
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -190,19 +191,17 @@
             { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, image: "img/pies.jpg" },
             { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, image: "img/pies.jpg" },
             { id: 42, name: "Біляші", category: "Випічка", price: 48, image: "img/belyashi.jpg" },
-            { id: 43, name: "Торт «Наполеон»", category: "Випічка", price: 65, image: "img/borsch.jpg" },
-            { id: 44, name: "Торт «Медовик»", category: "Випічка", price: 60, image: "img/borsch.jpg" },
 
-            // --- Напої та Соуси ---
-            { id: 32, name: "Компот", category: "Напої", price: 36, image: "img/borsch.jpg" },
-            { id: 33, name: "Сік", category: "Напої", price: 40, image: "img/borsch.jpg" },
-            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, image: "img/borsch.jpg" },
-            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, image: "img/borsch.jpg" },
-            { id: 45, name: "Сметана", category: "Соуси", price: 0, image: "img/borsch.jpg" },
-            { id: 46, name: "Майонез", category: "Соуси", price: 0, image: "img/borsch.jpg" },
-            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, image: "img/borsch.jpg" },
-            { id: 48, name: "Оцет", category: "Соуси", price: 0, image: "img/borsch.jpg" },
-            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, image: "img/borsch.jpg" }
+            // --- Напої та Соуси (без фото) ---
+            { id: 32, name: "Компот", category: "Напої", price: 36, image: "" },
+            { id: 33, name: "Сік", category: "Напої", price: 40, image: "" },
+            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, image: "" },
+            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, image: "" },
+            { id: 45, name: "Сметана", category: "Соуси", price: 0, image: "" },
+            { id: 46, name: "Майонез", category: "Соуси", price: 0, image: "" },
+            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, image: "" },
+            { id: 48, name: "Оцет", category: "Соуси", price: 0, image: "" },
+            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, image: "" }
         ];
 
         function renderDishes(items) {
@@ -213,8 +212,11 @@
                 const card = document.createElement('div');
                 card.classList.add('dish-card');
                 
+                // Если картинка указана — выводим тег <img>, если нет (напитки/соусы) — только название и цену
+                const imgHtml = dish.image ? `<img src="${dish.image}" alt="${dish.name}">` : '';
+                
                 card.innerHTML = `
-                    <img src="${dish.image}" alt="${dish.name}">
+                    ${imgHtml}
                     <div class="dish-info">
                         <h3>${dish.name}</h3>
                         <p class="price">${dish.price} ₴</p>
