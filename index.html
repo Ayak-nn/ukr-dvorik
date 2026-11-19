@@ -87,7 +87,7 @@
         }
         .dish-card img {
             width: 100%;
-            height: 260px; 
+            height: 260px;
             object-fit: cover;
         }
         .dish-info {
@@ -122,7 +122,6 @@
     </header>
 
     <main class="container">
-        <!-- Кнопки категорій -->
         <div class="categories">
             <button class="tab-btn active" data-category="Всі">Всі</button>
             <button class="tab-btn" data-category="Перші страви">Перші страви</button>
@@ -134,7 +133,6 @@
             <button class="tab-btn" data-category="Соуси">Соуси</button>
         </div>
 
-        <!-- Контейнер для карток страв -->
         <div class="dishes-grid" id="dishesGrid"></div>
     </main>
 
@@ -192,7 +190,7 @@
             { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, image: "img/pies.jpg" },
             { id: 42, name: "Біляші", category: "Випічка", price: 48, image: "img/belyashi.jpg" },
 
-            // --- Напої та Соуси (без фото) ---
+            // --- Напої та Соуси ---
             { id: 32, name: "Компот", category: "Напої", price: 36, image: "" },
             { id: 33, name: "Сік", category: "Напої", price: 40, image: "" },
             { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, image: "" },
@@ -208,13 +206,23 @@
             const grid = document.getElementById('dishesGrid');
             grid.innerHTML = '';
 
-            items.forEach(dish => {
+            const cleanItems = items.filter(dish => {
+                const nameLower = (dish.name || '').toLowerCase();
+                return !nameLower.includes('наполеон') && !nameLower.includes('медовик');
+            });
+
+            cleanItems.forEach(dish => {
                 const card = document.createElement('div');
                 card.classList.add('dish-card');
-                
-                // Если картинка указана — выводим тег <img>, если нет (напитки/соусы) — только название и цену
-                const imgHtml = dish.image ? `<img src="${dish.image}" alt="${dish.name}">` : '';
-                
+
+                const noPhotoCategories = ['напої', 'соуси'];
+                const isNoPhotoCategory = noPhotoCategories.includes((dish.category || '').trim().toLowerCase());
+                const hasValidImage = !isNoPhotoCategory && dish.image && dish.image.trim() !== '';
+
+                const imgHtml = hasValidImage
+                    ? `<img src="${dish.image}" alt="${dish.name}">`
+                    : '';
+
                 card.innerHTML = `
                     ${imgHtml}
                     <div class="dish-info">
