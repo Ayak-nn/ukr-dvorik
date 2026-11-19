@@ -14,11 +14,11 @@
         body {
             background-color: #f9f9f9;
             color: #333;
-            padding: 16px;
+            padding: 15px;
         }
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
         .header h1 {
             font-size: 2.1rem;
@@ -41,14 +41,14 @@
             outline: none;
             background: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: 0.25s;
+            transition: 0.3s;
         }
         .search-container input:focus {
             border-color: #e67e22;
             box-shadow: 0 2px 8px rgba(230,126,34,0.2);
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .categories {
@@ -56,7 +56,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
         .tab-btn {
             padding: 8px 16px;
@@ -66,39 +66,113 @@
             cursor: pointer;
             font-size: 0.95rem;
             color: #2c3e50;
-            transition: 0.2s;
+            transition: 0.25s;
         }
         .tab-btn:hover, .tab-btn.active {
             background: #e67e22;
             color: #fff;
             border-color: #e67e22;
         }
-        .menu-list {
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            align-items: start;
+        }
+        .dish-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
             display: flex;
             flex-direction: column;
-            gap: 8px;
         }
-        .menu-item {
-            background: #fff;
-            border-radius: 10px;
-            padding: 12px 16px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+
+        /* Контейнер фото */
+        .dish-img-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background-color: #ece6de;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dish-img-bg {
+            position: absolute;
+            inset: -12px;
+            width: calc(100% + 24px);
+            height: calc(100% + 24px);
+            object-fit: cover;
+            filter: blur(12px) brightness(0.92);
+            opacity: 0.65;
+            pointer-events: none;
+        }
+        /* Базовое приближение для всех блюд (+18%) */
+        .dish-img-main {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center center;
+            transform: scale(1.18);
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .dish-info {
+            padding: 12px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 14px;
+            gap: 10px;
+            flex-grow: 1;
+            background: #fff;
+            position: relative;
+            z-index: 2;
         }
-        .menu-item h3 {
+        .dish-info h3 {
             font-size: 1.02rem;
-            font-weight: 500;
-            color: #2c3e50;
             line-height: 1.3;
+            color: #2c3e50;
+            margin: 0;
         }
         .price {
-            font-size: 1.08rem;
+            font-size: 1.12rem;
             font-weight: 700;
             color: #e67e22;
             white-space: nowrap;
+            margin: 0;
+        }
+
+        @media (max-width: 540px) {
+            body {
+                padding: 10px;
+            }
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            .dishes-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .dish-img-wrap {
+                aspect-ratio: 1 / 1;
+            }
+            .dish-info {
+                padding: 9px 10px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            .dish-info h3 {
+                font-size: 0.92rem;
+            }
+            .price {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -123,77 +197,76 @@
             <button class="tab-btn" data-category="Соуси">Соуси</button>
         </div>
 
-        <div class="menu-list" id="dishesGrid"></div>
+        <div class="dishes-grid" id="dishesGrid"></div>
     </main>
 
     <script>
         const dishes = [
             // --- Перші страви ---
-            { id: 28, name: "Суп з домашньою локшиною (450г)", category: "Перші страви", price: 84 },
-            { id: 29, name: "Суп з фрикадельками (450г)", category: "Перші страви", price: 84 },
-            { id: 2, name: "Суп гороховий (450г)", category: "Перші страви", price: 84 },
-            { id: 54, name: "Харчо (450г)", category: "Перші страви", price: 84 },
-            { id: 30, name: "Суп грибний (450г)", category: "Перші страви", price: 105 },
-            { id: 1, name: "Борщ червоний (450г)", category: "Перші страви", price: 100 },
-            { id: 31, name: "Борщ зелений (450г)", category: "Перші страви", price: 100 },
-            { id: 3, name: "Солянка (450г)", category: "Перші страви", price: 116 },
-            { id: 6, name: "Бограч (450г)", category: "Перші страви", price: 158 },
-            { id: 5, name: "Окрошка (450г)", category: "Перші страви", price: 100 },
+            { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, image: "img/borsch.jpg" },
+            { id: 2, name: "Суп гороховий", category: "Перші страви", price: 84, image: "img/gorohoviy.jpg" },
+            { id: 3, name: "Солянка", category: "Перші страви", price: 116, image: "img/solyanka.jpg" },
+            { id: 5, name: "Окрошка", category: "Перші страви", price: 100, image: "img/okroshka.jpg" },
+            { id: 6, name: "Бограч", category: "Перші страви", price: 158, image: "img/bograch.jpg" },
+            { id: 28, name: "Суп з домашньою локшиною", category: "Перші страви", price: 84, image: "img/homemade-noodle-soup.jpg" },
+            { id: 29, name: "Суп з фрикадельками", category: "Перші страви", price: 84, image: "img/meatball-soup.jpg" },
+            { id: 30, name: "Суп грибний", category: "Перші страви", price: 105, image: "img/mushroom-soup.jpg" },
+            { id: 31, name: "Зелений борщ", category: "Перші страви", price: 100, image: "img/green-borsch.jpg" },
+            { id: 54, name: "Суп харчо", category: "Перші страви", price: 84, image: "img/kharcho-soup.jpg" },
 
             // --- М'ясні страви ---
-            { id: 53, name: "Відбивна свинна (100г)", category: "М'ясні страви", price: 80 },
-            { id: 24, name: "Відбивна куряча (100г)", category: "М'ясні страви", price: 70 },
-            { id: 18, name: "Відбивна по-французьки", category: "М'ясні страви", price: 80 },
-            { id: 52, name: "Піджарка (150г)", category: "М'ясні страви", price: 102 },
-            { id: 11, name: "М'ясна сковорідка (250г)", category: "М'ясні страви", price: 216 },
-            { id: 20, name: "Риба в клярі (100г)", category: "М'ясні страви", price: 70 },
-            { id: 27, name: "Голубці (250г)", category: "М'ясні страви", price: 111 },
+            { id: 11, name: "М'ясна сковорідка", category: "М'ясні страви", price: 216, image: "img/meat-skillet.jpg" },
+            { id: 12, name: "Картопляне пюре з гуляшом", category: "М'ясні страви", price: 140, image: "img/mashed-potatoes-goulash.jpg" },
+            { id: 18, name: "М'ясо по-французьки", category: "М'ясні страви", price: 80, image: "img/french-style-meat.jpg" },
+            { id: 24, name: "Відбивна курина", category: "М'ясні страви", price: 70, image: "img/chicken-chop.jpg" },
+            { id: 52, name: "Піджарка", category: "М'ясні страви", price: 102, image: "img/pork-stew.jpg" },
+            { id: 53, name: "Відбивна свинна", category: "М'ясні страви", price: 80, image: "img/pork-chop.jpg" },
 
             // --- Другі страви ---
-            { id: 19, name: "Картопляна запіканка", category: "Другі страви", price: 111 },
-            { id: 51, name: "Картопляне пюре (250г)", category: "Другі страви", price: 46 },
-            { id: 14, name: "Картопля фри (150г)", category: "Другі страви", price: 80 },
-            { id: 10, name: "Картопля по-селянськи (150г)", category: "Другі страви", price: 80 },
-            { id: 17, name: "Деруни (300г)", category: "Другі страви", price: 100 },
-            { id: 13, name: "Холодець (250г)", category: "Другі страви", price: 95 },
-            { id: 22, name: "Омлет (з 2 яєць)", category: "Другі страви", price: 60 },
-            { id: 21, name: "Пельмені домашні", category: "Другі страви", price: 96 },
-            { id: 50, name: "Карасик смажений (100г)", category: "Другі страви", price: 40 },
+            { id: 10, name: "Картопелька по-селянськи", category: "Другі страви", price: 80, image: "img/country-potatoes.jpg" },
+            { id: 14, name: "Картопля фри", category: "Другі страви", price: 80, image: "img/french-fries.jpg" },
+            { id: 15, name: "Гриби тушковані", category: "Другі страви", price: 70, image: "img/stewed-mushrooms.jpg" },
+            { id: 17, name: "Деруни", category: "Другі страви", price: 100, image: "img/deruny.jpg" },
+            { id: 19, name: "Картопляна запіканка", category: "Другі страви", price: 111, image: "img/potato-casserole.jpg" },
+            { id: 20, name: "Рибка в клярі", category: "Другі страви", price: 70, image: "img/fish-in-batter.jpg" },
+            { id: 21, name: "Пельмені", category: "Другі страви", price: 96, image: "img/pelmeni.jpg" },
+            { id: 27, name: "Голубці", category: "Другі страви", price: 111, image: "img/holubtsi.jpg" },
+            { id: 50, name: "Карасик смажений", category: "Другі страви", price: 40, image: "img/fried-carp.jpg" },
+            { id: 51, name: "Пюре", category: "Другі страви", price: 46, image: "img/mashed-potatoes.jpg" },
 
             // --- Салати ---
-            { id: 25, name: "Салат з капусти свіжої (200г)", category: "Салати", price: 56 },
-            { id: 9, name: "Салат з капусти квашеної маринованої", category: "Салати", price: 59 },
-            { id: 37, name: "Салат з буряка (300г)", category: "Салати", price: 70 },
-            { id: 23, name: "Салат «Овочевий» (250г)", category: "Салати", price: 75 },
-            { id: 38, name: "Салат «Вінегрет» (250г)", category: "Салати", price: 75 },
-            { id: 26, name: "Салат «Олів'є» (300г)", category: "Салати", price: 88 },
-            { id: 16, name: "Салат «Крабовий» (300г)", category: "Салати", price: 88 },
-            { id: 39, name: "Салат «Шуба» (300г)", category: "Салати", price: 100 },
-            { id: 7, name: "Салат «Грецький» (250г)", category: "Салати", price: 100 },
-            { id: 15, name: "Гриби тушковані в сливках (100г)", category: "Салати", price: 70 },
+            { id: 7, name: "Салат «Грецький»", category: "Салати", price: 100, image: "img/greek-salad.jpg" },
+            { id: 8, name: "Салат з буряка", category: "Салати", price: 70, image: "img/beetroot-salad.jpg" },
+            { id: 9, name: "Салат з квашеної капусти", category: "Салати", price: 59, image: "img/sauerkraut-salad.jpg" },
+            { id: 16, name: "Салат крабовий", category: "Салати", price: 88, image: "img/crab-salad.jpg" },
+            { id: 23, name: "Салат «Овочевий»", category: "Салати", price: 75, image: "img/vegetable-salad.jpg" },
+            { id: 25, name: "Салат із свіжої капусти", category: "Салати", price: 56, image: "img/cabbage-salad.jpg" },
+            { id: 26, name: "Салат «Олів'є»", category: "Салати", price: 88, image: "img/olivier-salad.jpg" },
+            { id: 36, name: "Салат із свіжої квашеної капусти", category: "Салати", price: 59, image: "img/cabbage-salad.jpg" },
+            { id: 37, name: "Салат з буряка", category: "Салати", price: 70, image: "img/beetroot-salad.jpg" },
+            { id: 38, name: "Салат «Вінегрет»", category: "Салати", price: 75, image: "img/vinegret.jpg" },
+            { id: 39, name: "Салат «Шуба»", category: "Салати", price: 100, image: "img/shuba.jpg" },
 
             // --- Випічка ---
-            { id: 40, name: "Пиріжки з картоплею (1 шт.)", category: "Випічка", price: 35 },
-            { id: 41, name: "Пиріжки з капустою (1 шт.)", category: "Випічка", price: 35 },
-            { id: 42, name: "Біляші (1 шт.)", category: "Випічка", price: 48 },
+            { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, image: "img/pies.jpg" },
+            { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, image: "img/pies.jpg" },
+            { id: 42, name: "Біляші", category: "Випічка", price: 48, image: "img/belyashi.jpg" },
 
-            // --- Напої ---
-            { id: 32, name: "Компот (250г)", category: "Напої", price: 36 },
-            { id: 33, name: "Сік (250г)", category: "Напої", price: 40 },
-            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25 },
-            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35 },
-
-            // --- Соуси ---
-            { id: 45, name: "Сметана", category: "Соуси", price: 0 },
-            { id: 46, name: "Майонез", category: "Соуси", price: 0 },
-            { id: 47, name: "Кетчуп", category: "Соуси", price: 0 },
-            { id: 48, name: "Оцет", category: "Соуси", price: 0 },
-            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0 }
+            // --- Напої та Соуси (без фото) ---
+            { id: 32, name: "Компот", category: "Напої", price: 36, image: "" },
+            { id: 33, name: "Сік", category: "Напої", price: 40, image: "" },
+            { id: 34, name: "Чай в асортименті", category: "Напої", price: 25, image: "" },
+            { id: 35, name: "Кава в асортименті", category: "Напої", price: 35, image: "" },
+            { id: 45, name: "Сметана", category: "Соуси", price: 0, image: "" },
+            { id: 46, name: "Майонез", category: "Соуси", price: 0, image: "" },
+            { id: 47, name: "Кетчуп", category: "Соуси", price: 0, image: "" },
+            { id: 48, name: "Оцет", category: "Соуси", price: 0, image: "" },
+            { id: 49, name: "Згущене молоко", category: "Соуси", price: 0, image: "" }
         ];
 
         function renderDishes(items) {
-            const list = document.getElementById('dishesGrid');
-            list.innerHTML = '';
+            const grid = document.getElementById('dishesGrid');
+            grid.innerHTML = '';
 
             const cleanItems = items.filter(dish => {
                 const nameLower = (dish.name || '').toLowerCase();
@@ -204,13 +277,32 @@
             });
 
             cleanItems.forEach(dish => {
-                const row = document.createElement('div');
-                row.classList.add('menu-item');
-                row.innerHTML = `
-                    <h3>${dish.name}</h3>
-                    <span class="price">${dish.price} ₴</span>
+                const card = document.createElement('div');
+                card.classList.add('dish-card');
+
+                const noPhotoCategories = ['напої', 'соуси'];
+                const isNoPhotoCategory = noPhotoCategories.includes((dish.category || '').trim().toLowerCase());
+                const hasValidImage = !isNoPhotoCategory && dish.image && dish.image.trim() !== '';
+
+                const scaleVal = dish.scale || 1.18;
+                const scaleStyle = `transform: scale(${scaleVal});`;
+                const posStyle = dish.pos ? `object-position: ${dish.pos};` : '';
+
+                const imgHtml = hasValidImage
+                    ? `<div class="dish-img-wrap">
+                           <img class="dish-img-bg" src="${dish.image}" alt="" aria-hidden="true">
+                           <img class="dish-img-main" src="${dish.image}" alt="${dish.name}" loading="lazy" style="${scaleStyle} ${posStyle}">
+                       </div>`
+                    : '';
+
+                card.innerHTML = `
+                    ${imgHtml}
+                    <div class="dish-info">
+                        <h3>${dish.name}</h3>
+                        <p class="price">${dish.price} ₴</p>
+                    </div>
                 `;
-                list.appendChild(row);
+                grid.appendChild(card);
             });
         }
 
