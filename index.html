@@ -88,7 +88,7 @@
             flex-direction: column;
         }
 
-        /* Контейнер фото: блюдо видно полностью без обрезки по краям */
+        /* Контейнер фото */
         .dish-img-wrap {
             position: relative;
             width: 100%;
@@ -99,7 +99,6 @@
             align-items: center;
             justify-content: center;
         }
-        /* Мягкий размытый фон из той же картинки, чтобы не было пустых белых полос по бокам */
         .dish-img-bg {
             position: absolute;
             inset: -12px;
@@ -110,7 +109,7 @@
             opacity: 0.65;
             pointer-events: none;
         }
-        /* Само блюдо целиком */
+        /* Базовое приближение для всех блюд (+18%) */
         .dish-img-main {
             position: relative;
             z-index: 1;
@@ -118,6 +117,7 @@
             height: 100%;
             object-fit: contain;
             object-position: center center;
+            transform: scale(1.18);
             display: block;
             transition: transform 0.25s ease;
         }
@@ -147,7 +147,6 @@
             margin: 0;
         }
 
-        /* Адаптация под мобильный экран */
         @media (max-width: 540px) {
             body {
                 padding: 10px;
@@ -159,7 +158,6 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
-            /* На телефоне квадратный формат 1:1 дает больше высоты для вертикальных и крупных фото */
             .dish-img-wrap {
                 aspect-ratio: 1 / 1;
             }
@@ -203,9 +201,6 @@
     </main>
 
     <script>
-        // Параметр scale (необязательный):
-        // Если на каком-то фото блюдо снято слишком мелко — добавь scale: 1.2 (увеличит на 20%).
-        // Если нужно сдвинуть центр кадра — добавь pos: "center 30%".
         const dishes = [
             // --- Перші страви ---
             { id: 1, name: "Борщ червоний", category: "Перші страви", price: 100, image: "img/borsch.jpg" },
@@ -289,7 +284,8 @@
                 const isNoPhotoCategory = noPhotoCategories.includes((dish.category || '').trim().toLowerCase());
                 const hasValidImage = !isNoPhotoCategory && dish.image && dish.image.trim() !== '';
 
-                const scaleStyle = dish.scale ? `transform: scale(${dish.scale});` : '';
+                const scaleVal = dish.scale || 1.18;
+                const scaleStyle = `transform: scale(${scaleVal});`;
                 const posStyle = dish.pos ? `object-position: ${dish.pos};` : '';
 
                 const imgHtml = hasValidImage
