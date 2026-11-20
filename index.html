@@ -221,6 +221,15 @@
             { id: 24, name: "Відбивна курина", category: "М'ясні страви", price: 70, image: "img/chicken-chop.jpg" },
             { id: 52, name: "Піджарка", category: "М'ясні страви", price: 102, image: "img/pork-stew.jpg" },
             { id: 53, name: "Відбивна свинна", category: "М'ясні страви", price: 80, image: "img/pork-chop.jpg" },
+            { id: 101, name: "Котлети свин./кур. (120г)", category: "М'ясні страви", price: 65, image: "" },
+            { id: 102, name: "Котлета рибна (120г)", category: "М'ясні страви", price: 67, image: "" },
+            { id: 103, name: "Гуляш (150г)", category: "М'ясні страви", price: 102, image: "" },
+            { id: 104, name: "Ковбаса домашня (100г)", category: "М'ясні страви", price: 85, image: "" },
+            { id: 105, name: "Стегно куряче (100г)", category: "М'ясні страви", price: 60, image: "" },
+            { id: 106, name: "Печінка тушкована в сливках (100г)", category: "М'ясні страви", price: 60, image: "" },
+            { id: 107, name: "Сало (150г)", category: "М'ясні страви", price: 85, image: "" },
+            { id: 108, name: "Курячі нагетси (4 шт.)", category: "М'ясні страви", price: 80, image: "" },
+            { id: 109, name: "Курячі нагетси (6 шт.)", category: "М'ясні страви", price: 115, image: "" },
 
             // --- Другі страви ---
             { id: 10, name: "Картопелька по-селянськи", category: "Другі страви", price: 80, image: "img/country-potatoes.jpg" },
@@ -233,6 +242,26 @@
             { id: 27, name: "Голубці", category: "Другі страви", price: 111, image: "img/holubtsi.jpg" },
             { id: 50, name: "Карасик смажений", category: "Другі страви", price: 40, image: "img/fried-carp.jpg" },
             { id: 51, name: "Пюре", category: "Другі страви", price: 46, image: "img/mashed-potatoes.jpg" },
+            { id: 110, name: "Картопля смажена (250г)", category: "Другі страви", price: 70, image: "" },
+            { id: 111, name: "зі шкварками (50г)", category: "Другі страви", price: 30, pricePrefix: "+", image: "" },
+            { id: 112, name: "Банош (450г)", category: "Другі страви", price: 140, image: "" },
+            { id: 113, name: "Гречка (250г)", category: "Другі страви", price: 42, image: "" },
+            { id: 114, name: "Макарони (250г)", category: "Другі страви", price: 37, image: "" },
+            { id: 115, name: "Локшина (250г)", category: "Другі страви", price: 37, image: "" },
+            { id: 116, name: "Жаркое в горшку (450г)", category: "Другі страви", price: 116, image: "" },
+            { id: 117, name: "Плов в горшку (250г)", category: "Другі страви", price: 116, image: "" },
+            { id: 118, name: "Яйце (1 шт.)", category: "Другі страви", price: 25, image: "" },
+            { id: 119, name: "з ковбасою (50г)", category: "Другі страви", price: 25, pricePrefix: "+", image: "" },
+            { id: 120, name: "з овочами (50г)", category: "Другі страви", price: 25, pricePrefix: "+", image: "" },
+            { id: 121, name: "зі шкварками (50г)", category: "Другі страви", price: 30, pricePrefix: "+", image: "" },
+            { id: 122, name: "Пельмені в бульйоні", category: "Другі страви", price: 124, image: "" },
+            { id: 124, name: "Вареники домашні з картоплею", category: "Другі страви", price: 78, image: "" },
+            { id: 125, name: "Вареники домашні з капустою", category: "Другі страви", price: 78, image: "" },
+            { id: 126, name: "Вареники домашні з сиром солоним", category: "Другі страви", price: 78, image: "" },
+            { id: 127, name: "Вареники домашні з сиром солодким", category: "Другі страви", price: 78, image: "" },
+            { id: 128, name: "Вареники домашні з м’ясом", category: "Другі страви", price: 96, image: "" },
+            { id: 129, name: "Вареники домашні з печінкою", category: "Другі страви", price: 78, image: "" },
+            { id: 131, name: "Вівсяна каша (150г)", category: "Другі страви", price: 37, image: "" },
 
             // --- Салати ---
             { id: 7, name: "Салат «Грецький»", category: "Салати", price: 100, image: "img/greek-salad.jpg" },
@@ -251,6 +280,9 @@
             { id: 40, name: "Пиріжки з картоплею", category: "Випічка", price: 35, image: "img/pies.jpg" },
             { id: 41, name: "Пиріжки з капустою", category: "Випічка", price: 35, image: "img/pies.jpg" },
             { id: 42, name: "Біляші", category: "Випічка", price: 48, image: "img/belyashi.jpg" },
+            { id: 130, name: "Млинці з сиром солодким (1 шт.)", category: "Випічка", price: 37, image: "" },
+            { id: 132, name: "Млинці з м’ясом (1 шт.)", category: "Випічка", price: 51, image: "" },
+            { id: 133, name: "Сирники (1 шт.)", category: "Випічка", price: 32, image: "" },
 
             // --- Напої та Соуси (без фото) ---
             { id: 32, name: "Компот", category: "Напої", price: 36, image: "" },
@@ -295,11 +327,13 @@
                        </div>`
                     : '';
 
+                const prefix = dish.pricePrefix || '';
+
                 card.innerHTML = `
                     ${imgHtml}
                     <div class="dish-info">
                         <h3>${dish.name}</h3>
-                        <p class="price">${dish.price} ₴</p>
+                        <p class="price">${prefix}${dish.price} ₴</p>
                     </div>
                 `;
                 grid.appendChild(card);
